@@ -49,6 +49,9 @@ action :add do
     export #{new_resource.environment_variable}="#{new_resource.value}"
   EOH
   file.run_action(:create)
+  if(new_resource.change_current_env) 
+    ENV[new_resource.environment_variable] = new_resource.value 
+  end
 end
 
 #
